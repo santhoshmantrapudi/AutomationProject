@@ -1,45 +1,21 @@
 package com.Selenium.JsonResponse;
 
+import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class CreateResponse {
 
-@SerializedName("name")
+@SerializedName("response")
 @Expose
-private String name;
-@SerializedName("surname")
-@Expose
-private String surname;
-@SerializedName("address")
-@Expose
-private Address address;
+private List<response> response = null;
 
-public String getName() {
-return name;
+public List<response> getResponse() {
+return response;
 }
 
-public void setName(String name) {
-this.name = name;
-}
-
-public String getSurname() {
-return surname;
-}
-
-public void setSurname(String surname) {
-this.surname = surname;
-}
-
-public Address getAddress() {
-return address;
-}
-
-public void setAddress(Address address) {
-this.address = address;
+public void setResponse(List<response> response) {
+this.response = response;
 }
 
 }
-
-
-

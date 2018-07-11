@@ -7,13 +7,18 @@ import org.json.JSONObject;
 
 import com.Selenium.JsonRequest.Address;
 import com.Selenium.JsonRequest.CreatePerson;
+import com.Selenium.JsonResponse.CreateResponse;
+import com.google.gson.Gson;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+
+
 public class Service {
-	List<JSONObject> list;
-	public Response personcreation(String name,String surname,String city,String landmark,String state,String zipcode) {
+	    List<JSONObject> list;
+		public Response personcreation(String name,String surname,String city,String landmark,String state,String zipcode) {	
 		CreatePerson pogo1=new CreatePerson();
 		pogo1.setName(name);
 		pogo1.setSurname(surname);
@@ -29,20 +34,27 @@ public class Service {
 		list.add(json);
 		System.out.println("json array is " +list);
 		
-		RequestSpecification requestspec=RestAssured.given();
-		requestspec.contentType("application/json");
-		requestspec.accept("application/json");
-		requestspec.body(list.toString());
+		RequestSpecification requestspecification=RestAssured.given();
+		requestspecification.contentType("application/json");
+		requestspecification.accept("application/json");
+		requestspecification.body(list.toString());
 		System.out.println("URL is "+ServiceURL.URL);
-		Response response=requestspec.post(ServiceURL.URL);
+		Response response=requestspecification.post(ServiceURL.URL);
 		return response;
 		
 	}
 	
 	public static void main(String[] args) {
 		Service servicerequest=new Service();
-		Response data=servicerequest.personcreation("name", "surname", "city", "landmark", "state", "560072");
+		Response data=servicerequest.personcreation("name", "surname", "city", "landmark", "state", "560074");
 		System.out.println("Response is  "+data.asString());
+		Gson gson=new Gson();
+		CreateResponse createresponse=gson.fromJson(data.asString(), CreateResponse.class);
+		System.out.println(createresponse.getResponse().get(0).getName());
+		System.out.println(createresponse.getResponse().get(0).getSurname());
+		System.out.println(createresponse.getResponse().get(0).getAddress().getCity());
+		System.out.println(data.getStatusCode());
+		
 	}
 
 }
