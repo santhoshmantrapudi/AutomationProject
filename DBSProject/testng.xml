@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<Suite name="Suite">
+	<test thread-count="1" name="Test">
+	    <parameter>chrome</parameter>
+		<classes>
+			<class name="TestCases.DigiDocTest" />
+			<class name="TestCases.sample" />
+		</classes>
+	</test>
+	<test thread-count="1" name="Test">
+		<parameter>firefox</parameter>
+		<classes>
+			<class name="TestCases.DigiDocTest" />
+			<class name="TestCases.DigiDocTest" />
+		</classes>
+	</test>
+</Suite>
+
